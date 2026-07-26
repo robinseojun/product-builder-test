@@ -83,36 +83,36 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
   return (
     <div className="space-y-6">
       {/* Settings Panel */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-5 text-white shadow-lg space-y-5">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 text-slate-900 dark:text-white shadow-lg space-y-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-slate-800 pb-4">
           <div>
             <h2 className="text-lg font-extrabold flex items-center gap-2 text-sky-400">
               <SlidersHorizontal className="w-5 h-5 text-sky-400" />
               조건별 추천 생성 (고정수 & 제외수)
             </h2>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
               반자동 고정수, 제외수, 홀짝 비율, 번호 합계 범위를 원하는 대로 맞춤 설정하세요.
             </p>
           </div>
 
           <button
             onClick={handleResetFilters}
-            className="text-xs text-slate-400 hover:text-white underline underline-offset-4 flex items-center gap-1 self-start sm:self-auto"
+            className="text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white underline underline-offset-4 flex items-center gap-1 self-start sm:self-auto"
           >
             설정 초기화
           </button>
         </div>
 
         {/* Mode Selector & Quick Summary */}
-        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
+        <div className="flex flex-wrap items-center justify-between gap-3 bg-slate-100 dark:bg-slate-800/80 p-3 rounded-xl border border-slate-700/60">
           <div className="flex items-center gap-2 text-xs">
-            <span className="text-slate-400">선택 모드:</span>
+            <span className="text-slate-600 dark:text-slate-400">선택 모드:</span>
             <button
               onClick={() => setSelectMode('fixed')}
               className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 transition-all ${
                 selectMode === 'fixed'
                   ? 'bg-amber-500 text-slate-950 shadow'
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  : 'bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-600'
               }`}
             >
               <CheckCircle2 className="w-3.5 h-3.5" />
@@ -123,7 +123,7 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
               className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1 transition-all ${
                 selectMode === 'excluded'
                   ? 'bg-rose-600 text-white shadow'
-                  : 'bg-slate-700 text-slate-300 hover:bg-slate-600'
+                  : 'bg-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-600'
               }`}
             >
               <XCircle className="w-3.5 h-3.5" />
@@ -131,13 +131,13 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
             </button>
           </div>
 
-          <div className="text-xs text-slate-400">
+          <div className="text-xs text-slate-600 dark:text-slate-400">
             아래 번호판에서 숫자를 클릭하여 {selectMode === 'fixed' ? '고정수' : '제외수'}로 추가하세요.
           </div>
         </div>
 
         {/* 1 ~ 45 Number Grid Picker */}
-        <div className="bg-slate-950 p-4 rounded-xl border border-slate-800">
+        <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
           <div className="grid grid-cols-5 sm:grid-cols-9 md:grid-cols-15 gap-1.5 sm:gap-2">
             {Array.from({ length: 45 }, (_, i) => i + 1).map((num) => {
               const isFixed = fixedNumbers.includes(num);
@@ -159,7 +159,7 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
                     }
                   `}
                 >
-                  {isFixed && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-300 border border-slate-900" />}
+                  {isFixed && <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-amber-300 border border-slate-200 dark:border-slate-900" />}
                   {isExcluded && <span className="absolute top-0.5 right-0.5 text-[9px] text-rose-400">✕</span>}
                   {num}
                 </button>
@@ -170,7 +170,7 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
 
         {/* Selected Summary Tags */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div className="bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
+          <div className="bg-slate-100 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
             <span className="font-bold text-amber-400 block mb-1.5">📌 포함 고정수 ({fixedNumbers.length}개):</span>
             {fixedNumbers.length === 0 ? (
               <span className="text-slate-500 italic">선택된 고정수 없음 (완전자동)</span>
@@ -185,7 +185,7 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
             )}
           </div>
 
-          <div className="bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
+          <div className="bg-slate-100 dark:bg-slate-800/60 p-3 rounded-xl border border-slate-700/60">
             <span className="font-bold text-rose-400 block mb-1.5">🚫 제외수 ({excludedNumbers.length}개):</span>
             {excludedNumbers.length === 0 ? (
               <span className="text-slate-500 italic">선택된 제외수 없음</span>
@@ -202,14 +202,14 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
         </div>
 
         {/* Advanced Filters: Odd/Even, Sum Range, Consecutive */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-slate-800 text-xs">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-slate-200 dark:border-slate-800 text-xs">
           {/* Odd/Even */}
           <div>
-            <label className="font-bold text-slate-300 block mb-1.5">홀짝 비율 필터</label>
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1.5">홀짝 비율 필터</label>
             <select
               value={oddEvenRatio}
               onChange={(e) => setOddEvenRatio(e.target.value as FilterOptions['oddEvenRatio'])}
-              className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-medium focus:ring-2 focus:ring-sky-500 outline-none"
+              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-2 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-sky-500 outline-none"
             >
               <option value="ALL">제한 없음 (전체)</option>
               <option value="3:3">3 : 3 (가장 표준적인 균형)</option>
@@ -222,7 +222,7 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
 
           {/* Sum Range */}
           <div>
-            <label className="font-bold text-slate-300 block mb-1.5">
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1.5">
               총합 범위 ({minSum} ~ {maxSum})
             </label>
             <div className="flex items-center gap-2">
@@ -232,7 +232,7 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
                 max="255"
                 value={minSum}
                 onChange={(e) => setMinSum(Number(e.target.value))}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white text-center font-bold"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-2 text-slate-900 dark:text-white text-center font-bold"
               />
               <span className="text-slate-500">~</span>
               <input
@@ -241,18 +241,18 @@ export const CustomGenerator: React.FC<CustomGeneratorProps> = ({ onSaveSet, sou
                 max="255"
                 value={maxSum}
                 onChange={(e) => setMaxSum(Number(e.target.value))}
-                className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white text-center font-bold"
+                className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-2 text-slate-900 dark:text-white text-center font-bold"
               />
             </div>
           </div>
 
           {/* Game Count Selector */}
           <div>
-            <label className="font-bold text-slate-300 block mb-1.5">생성할 게임 수</label>
+            <label className="font-bold text-slate-700 dark:text-slate-300 block mb-1.5">생성할 게임 수</label>
             <select
               value={gameCount}
               onChange={(e) => setGameCount(Number(e.target.value))}
-              className="w-full bg-slate-800 border border-slate-700 rounded-lg p-2 text-white font-medium focus:ring-2 focus:ring-sky-500 outline-none"
+              className="w-full bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg p-2 text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-sky-500 outline-none"
             >
               <option value={1}>1 게임</option>
               <option value={2}>2 게임</option>

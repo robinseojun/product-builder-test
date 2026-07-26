@@ -122,7 +122,7 @@ export const LottoPaper: React.FC<LottoPaperProps> = ({
               >
                 {/* Game Label & Type */}
                 <div className="flex items-center gap-2 min-w-[90px]">
-                  <span className="w-7 h-7 rounded-lg bg-slate-900 text-amber-400 font-black flex items-center justify-center text-sm shadow">
+                  <span className="w-7 h-7 rounded-lg bg-white dark:bg-slate-900 text-amber-400 font-black flex items-center justify-center text-sm shadow">
                     {game.label || String.fromCharCode(65 + index)}
                   </span>
                   <div className="flex flex-col">
@@ -135,7 +135,7 @@ export const LottoPaper: React.FC<LottoPaperProps> = ({
                         ? '꿈해몽'
                         : '추첨'}
                     </span>
-                    <span className="text-[10px] text-slate-400">6/45</span>
+                    <span className="text-[10px] text-slate-600 dark:text-slate-400">6/45</span>
                   </div>
                 </div>
 
@@ -157,7 +157,7 @@ export const LottoPaper: React.FC<LottoPaperProps> = ({
                     <span>
                       합계: <strong className="text-slate-800 font-semibold">{sum}</strong>
                     </span>
-                    <span className="text-slate-300">|</span>
+                    <span className="text-slate-700 dark:text-slate-300">|</span>
                     <span>
                       홀:짝{' '}
                       <strong className="text-slate-800 font-semibold">
@@ -169,7 +169,7 @@ export const LottoPaper: React.FC<LottoPaperProps> = ({
                   {onDelete && (
                     <button
                       onClick={() => onDelete(game.id)}
-                      className="text-slate-400 hover:text-red-500 transition-colors p-1"
+                      className="text-slate-600 dark:text-slate-400 hover:text-red-500 transition-colors p-1"
                       title="삭제"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

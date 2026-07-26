@@ -13,6 +13,24 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'quick' | 'custom' | 'dream' | 'saved'>('quick');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isSimulatorOpen, setIsSimulatorOpen] = useState<boolean>(false);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('lotto_theme');
+      if (stored === 'light' || stored === 'dark') return stored;
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+      return 'light';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('lotto_theme', theme);
+  }, [theme]);
 
   // LocalStorage persistence for saved combinations
   const [savedGames, setSavedGames] = useState<LottoGame[]>(() => {
@@ -52,18 +70,20 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans selection:bg-amber-500 selection:text-slate-950">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans selection:bg-amber-500 selection:text-slate-950">
       {/* Top Sticky Header */}
       <Header
         soundEnabled={soundEnabled}
         onToggleSound={() => setSoundEnabled(!soundEnabled)}
         onOpenSimulator={() => setIsSimulatorOpen(true)}
+        theme={theme}
+        onToggleTheme={() => setTheme(prev => prev === 'dark' ? 'light' : 'dark')}
       />
 
       {/* Main Container */}
       <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-6 space-y-6">
         {/* Navigation Tabs Bar */}
-        <div className="bg-slate-900 border border-slate-800 p-1.5 rounded-2xl flex items-center gap-1 shadow-lg overflow-x-auto">
+        <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-1.5 rounded-2xl flex items-center gap-1 shadow-lg overflow-x-auto">
           <button
             onClick={() => {
               setActiveTab('quick');
@@ -72,7 +92,7 @@ export default function App() {
             className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
               activeTab === 'quick'
                 ? 'bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 shadow-md scale-[1.02]'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:bg-slate-800/60'
             }`}
           >
             <Dices className="w-4 h-4" />
@@ -87,7 +107,7 @@ export default function App() {
             className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
               activeTab === 'custom'
                 ? 'bg-gradient-to-r from-sky-500 to-blue-500 text-white shadow-md scale-[1.02]'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:bg-slate-800/60'
             }`}
           >
             <SlidersHorizontal className="w-4 h-4" />
@@ -102,7 +122,7 @@ export default function App() {
             className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
               activeTab === 'dream'
                 ? 'bg-gradient-to-r from-indigo-500 to-purple-500 text-white shadow-md scale-[1.02]'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:bg-slate-800/60'
             }`}
           >
             <CloudMoon className="w-4 h-4" />
@@ -117,7 +137,7 @@ export default function App() {
             className={`flex-1 min-w-[100px] py-2.5 px-3 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 transition-all whitespace-nowrap relative ${
               activeTab === 'saved'
                 ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-md scale-[1.02]'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:bg-slate-800/60'
             }`}
           >
             <Bookmark className="w-4 h-4" />
@@ -163,8 +183,8 @@ export default function App() {
         </div>
 
         {/* Lotto Ball Color Legend Guide */}
-        <div className="bg-slate-900/60 border border-slate-800/60 rounded-2xl p-4 text-xs space-y-2">
-          <span className="font-extrabold text-slate-400 block">
+        <div className="bg-white dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800/60 rounded-2xl p-4 text-xs space-y-2">
+          <span className="font-extrabold text-slate-600 dark:text-slate-400 block">
             💡 대한민국 로또 6/45 공식 공 색상 표준:
           </span>
           <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-[11px]">
@@ -201,7 +221,7 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 py-6 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 dark:border-slate-900 py-6 text-center text-xs text-slate-500">
         <p>© 2026 로또 번호 생성기. 본 서비스의 추천 번호는 확률 및 통계 기반 참고용입니다.</p>
       </footer>
     </div>

@@ -57,22 +57,22 @@ export const SimulatorModal: React.FC<SimulatorModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-50 dark:bg-slate-950/80 backdrop-blur-md">
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.9 }}
-        className="bg-slate-900 border border-slate-800 text-white rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl relative"
+        className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl relative"
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-900/90">
+        <div className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90">
           <div className="flex items-center gap-2">
             <Sparkles className="w-5 h-5 text-amber-400" />
             <h3 className="font-extrabold text-base text-amber-400">라이브 로또 추첨기 시뮬레이터</h3>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-1 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:bg-slate-800 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -102,7 +102,7 @@ export const SimulatorModal: React.FC<SimulatorModalProps> = ({
               ) : drawnBalls.length === 6 ? (
                 <Trophy className="w-12 h-12 text-amber-400 animate-bounce" />
               ) : (
-                <span className="text-xs text-slate-400 font-bold">
+                <span className="text-xs text-slate-600 dark:text-slate-400 font-bold">
                   [추첨 시작] 버튼을 클릭하세요
                 </span>
               )}
@@ -110,8 +110,8 @@ export const SimulatorModal: React.FC<SimulatorModalProps> = ({
           </div>
 
           {/* Tray of Drawn Balls */}
-          <div className="bg-slate-950 p-4 rounded-xl border border-slate-800/80 min-h-[90px] flex flex-col items-center justify-center">
-            <span className="text-[11px] text-slate-400 font-semibold mb-2 block">
+          <div className="bg-slate-50 dark:bg-slate-950 p-4 rounded-xl border border-slate-200 dark:border-slate-800/80 min-h-[90px] flex flex-col items-center justify-center">
+            <span className="text-[11px] text-slate-600 dark:text-slate-400 font-semibold mb-2 block">
               추첨된 6개 당첨 번호 + 보너스 번호
             </span>
 
@@ -161,7 +161,7 @@ export const SimulatorModal: React.FC<SimulatorModalProps> = ({
                   onSaveGame(targetGame);
                   onClose();
                 }}
-                className="px-4 py-3 rounded-xl font-bold text-xs bg-slate-800 text-amber-400 border border-slate-700 hover:bg-slate-700 transition-all"
+                className="px-4 py-3 rounded-xl font-bold text-xs bg-slate-100 dark:bg-slate-800 text-amber-400 border border-slate-700 hover:bg-slate-700 transition-all"
               >
                 추첨 결과 저장
               </button>
