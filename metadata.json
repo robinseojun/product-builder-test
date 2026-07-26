@@ -1,6 +1,6 @@
 {
-  "name": "로또 번호 생성기",
-  "description": "한국 로또 6/45 번호 자동 및 조건별 생성기, 번호 분석 및 저장 기능 제공",
-  "requestFramePermissions": [],
+  "name": "고양이상 강아지상 테스트",
+  "description": "웹캠을 통해 내 얼굴이 고양이상인지 강아지상인지 구별해주는 테스트 앱입니다.",
+  "requestFramePermissions": ["camera"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
