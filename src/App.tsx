@@ -6,6 +6,7 @@ import { CustomGenerator } from './components/CustomGenerator';
 import { DreamGenerator } from './components/DreamGenerator';
 import { SavedGames } from './components/SavedGames';
 import { SimulatorModal } from './components/SimulatorModal';
+import { ContactModal } from './components/ContactModal';
 import { Dices, SlidersHorizontal, CloudMoon, Bookmark, Sparkles, HelpCircle } from 'lucide-react';
 import { playLottoSound } from './utils/lotto';
 
@@ -13,6 +14,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<'quick' | 'custom' | 'dream' | 'saved'>('quick');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isSimulatorOpen, setIsSimulatorOpen] = useState<boolean>(false);
+  const [isContactOpen, setIsContactOpen] = useState<boolean>(false);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem('lotto_theme');
@@ -221,9 +223,17 @@ export default function App() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-slate-200 dark:border-slate-900 py-6 text-center text-xs text-slate-500">
+      <footer className="border-t border-slate-200 dark:border-slate-800 py-6 text-center text-xs text-slate-500 space-y-2">
         <p>© 2026 로또 번호 생성기. 본 서비스의 추천 번호는 확률 및 통계 기반 참고용입니다.</p>
+        <button 
+          onClick={() => setIsContactOpen(true)}
+          className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 underline underline-offset-4"
+        >
+          제휴 및 문의하기
+        </button>
       </footer>
+      
+      <ContactModal isOpen={isContactOpen} onClose={() => setIsContactOpen(false)} />
     </div>
   );
 }
