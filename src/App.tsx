@@ -7,6 +7,7 @@ import { DreamGenerator } from './components/DreamGenerator';
 import { SavedGames } from './components/SavedGames';
 import { SimulatorModal } from './components/SimulatorModal';
 import { ContactModal } from './components/ContactModal';
+import { CommentSection } from './components/CommentSection';
 import { Dices, SlidersHorizontal, CloudMoon, Bookmark, Sparkles, HelpCircle } from 'lucide-react';
 import { playLottoSound } from './utils/lotto';
 
@@ -212,6 +213,9 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* Comment Section */}
+        <CommentSection />
       </main>
 
       {/* Simulator Modal */}
